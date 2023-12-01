@@ -1,5 +1,34 @@
 defmodule Trebuchet do
   @non_number_filter_regex ~r/[\d]|(?=(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety))/
+  @number_replacements %{
+    "one" => 1,
+    "two" => 2,
+    "three" => 3,
+    "four" => 4,
+    "five" => 5,
+    "six" => 6,
+    "seven" => 7,
+    "eight" => 8,
+    "nine" => 9,
+    "ten" => 10,
+    "eleven" => 11,
+    "twelve" => 12,
+    "thirteen" => 13,
+    "fourteen" => 14,
+    "fifteen" => 15,
+    "sixteen" => 16,
+    "seventeen" => 17,
+    "eighteen" => 18,
+    "nineteen" => 19,
+    "twenty" => 20,
+    "thirty" => 30,
+    "forty" => 40,
+    "fifty" => 50,
+    "sixty" => 60,
+    "seventy" => 70,
+    "eighty" => 80,
+    "ninety" => 90
+  }
 
   def part_one(input \\ nil) do
     if input do
@@ -20,7 +49,6 @@ defmodule Trebuchet do
     end
     |> String.split("\n")
     |> Enum.map(&filter_non_numbers/1)
-    |> Enum.map(&replace_strings_with_numbers/1)
     |> Enum.map(&get_sum_of_first_and_last_digits/1)
     |> Enum.sum()
   end
@@ -37,45 +65,16 @@ defmodule Trebuchet do
 
   defp filter_non_numbers(line) do
     Regex.scan(
-      # lol
       @non_number_filter_regex,
       line
     )
     |> List.flatten()
     |> Enum.reject(&(&1 == ""))
+    |> Enum.map(&look_up_number/1)
     |> Enum.join("")
   end
 
-  defp replace_strings_with_numbers(line) do
-    line
-    |> String.replace(~r/one/, "1")
-    |> String.replace(~r/two/, "2")
-    |> String.replace(~r/three/, "3")
-    |> String.replace(~r/four/, "4")
-    |> String.replace(~r/five/, "5")
-    |> String.replace(~r/six/, "6")
-    |> String.replace(~r/seven/, "7")
-    |> String.replace(~r/eight/, "8")
-    |> String.replace(~r/nine/, "9")
-    |> String.replace(~r/ten/, "10")
-    |> String.replace(~r/eleven/, "11")
-    |> String.replace(~r/twelve/, "12")
-    |> String.replace(~r/thirteen/, "13")
-    |> String.replace(~r/fourteen/, "14")
-    |> String.replace(~r/fifteen/, "15")
-    |> String.replace(~r/sixteen/, "16")
-    |> String.replace(~r/seventeen/, "17")
-    |> String.replace(~r/eighteen/, "18")
-    |> String.replace(~r/nineteen/, "19")
-    |> String.replace(~r/twenty/, "20")
-    |> String.replace(~r/thirty/, "30")
-    |> String.replace(~r/forty/, "40")
-    |> String.replace(~r/fifty/, "50")
-    |> String.replace(~r/sixty/, "60")
-    |> String.replace(~r/seventy/, "70")
-    |> String.replace(~r/eighty/, "80")
-    |> String.replace(~r/ninety/, "90")
-  end
+  defp look_up_number(match), do: Map.get(@number_replacements, match, match)
 
   defp get_sum_of_first_and_last_digits(line) do
     digits = line
@@ -87,7 +86,7 @@ defmodule Trebuchet do
     if length(digits) == 0 do
       0
     else
-      String.to_integer("#{List.first(digits)}#{List.last(digits)}") |> IO.inspect(label: "SUM")
+      String.to_integer("#{List.first(digits)}#{List.last(digits)}")
     end
   end
 end
