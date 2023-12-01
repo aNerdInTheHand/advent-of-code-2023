@@ -6,4 +6,4 @@ Advent of code 2023 solutions.
 
 ### Day One
 
-[Elixir](aoc_elixir/lib/1/)
+[Elixir](aoc_elixir/lib/1/trebuchet.ex) solution code.
