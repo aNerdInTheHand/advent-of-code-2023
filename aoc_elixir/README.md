@@ -1,21 +1,11 @@
 # AocElixir
 
-**TODO: Add description**
+Solutions for Advent of Code 2023 written in Elixir.
 
-## Installation
+## Running locally
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `aoc_elixir` to your list of dependencies in `mix.exs`:
+Clone the project and `cd` into `aoc_elixir`. Run `mix deps.get`.
 
-```elixir
-def deps do
-  [
-    {:aoc_elixir, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/aoc_elixir>.
-
+From here you can either run `mix test` to run the automated test suite, or `iex -S mix`
+to run the project in an `iex` session. In an `iex` session you can invoke functions with
+`ModuleName.function_name()`, e.g. `Trebuchet.part_two()`.
