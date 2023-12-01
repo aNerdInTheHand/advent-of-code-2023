@@ -1,2 +1,9 @@
 # advent-of-code-2023
-Advent of code solutions
+
+Advent of code 2023 solutions.
+
+## Solutions
+
+### Day One
+
+[Elixir](aoc_elixir/lib/1/trebuchet.ex) solution code.
